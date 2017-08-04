@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  app:
+    build: ./app
+    volumes:
+      - data:/usr/workdir/common
+      - ./app:/usr/workdir
+    container_name: app-container
+  test:
+    build: ./test
+    volumes:
+      - data:/usr/workdir/common
+      - ./test:/usr/workdir
+    container_name: test-container
+    links:
+      - app
+  build:
+    build: ./build
+    volumes:
+      - data:/usr/workdir/common
+      - ./build:/usr/workdir
+    container_name: build-container
+volumes:
+  data:
